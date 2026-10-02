@@ -1,0 +1,12 @@
+{
+  "name": "allman-agg-loads",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Allman Contracts — Agg Loads (interactive prototype: site and quarry collection dockets)",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
