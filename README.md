@@ -1,9 +1,9 @@
-# Allman Contracts — Agg Loads
+# David Allman Haulage — Agg Loads
 
-Interactive demo of the **Agg Loads** docket module for **Allman Contracts Ltd**,
+Interactive demo of the **Agg Loads** docket module for **David Allman Haulage**,
 prepared by DMC Consultancy Ltd. It uses the Site / Quarry docket flow from the earlier
-Agg Loads wireframes, in Allman colours: navy `#06192E` and orange `#E8973E`, both
-sampled from the logo. The logo is embedded in the page as a data URI.
+Agg Loads wireframes, in black `#111111` and yellow `#FFC20E`. The company has no logo,
+so the header shows a plain text wordmark (DAVID ALLMAN / HAULAGE).
 
 One self-contained `public/index.html`. No build, no dependencies, and no network
 requests.
@@ -49,4 +49,4 @@ New Project → Deploy from GitHub repo → this repository. Railway reads
 ## Demo data
 
 Customers, sites, quarries, materials and the driver (David Allman, 231-KE-4471) are
-placeholders. They need replacing with Allman's real lists before anything is wired to the backend.
+placeholders. They need replacing with the company's real lists before anything is wired to the backend.
