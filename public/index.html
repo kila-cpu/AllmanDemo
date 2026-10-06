@@ -497,6 +497,19 @@
     font-weight:700;display:flex;gap:10px;align-items:center;line-height:1.35;text-align:left}
   .nudge button{margin-left:auto;flex:none;border:0;background:#111;color:var(--orange);border-radius:9px;padding:9px 11px;font-size:12.5px;font-weight:800;cursor:pointer}
 
+  /* ---------- clock-in popup ---------- */
+  .trucks{display:flex;flex-direction:column;gap:9px}
+  .truck{display:flex;align-items:center;gap:12px;width:100%;background:#fff;border:1.5px solid var(--field-line);border-radius:13px;
+    padding:13px;cursor:pointer;text-align:left;font-family:inherit;color:var(--ink);transition:.12s}
+  .truck:hover{border-color:var(--orange)}
+  .truck:active{transform:scale(.985);background:var(--orange-soft)}
+  .truck .ti{flex:none;width:44px;height:44px;border-radius:12px;background:var(--orange);color:#111;display:grid;place-items:center}
+  .truck .ti svg{width:24px;height:24px}
+  .truck .tt{flex:1;min-width:0}
+  .truck .tt b{display:block;font-family:var(--mono);font-size:15.5px;font-weight:800;letter-spacing:.03em}
+  .truck .tt small{display:block;font-size:12.5px;color:var(--sub);font-weight:600;margin-top:2px}
+  .truck .tag{flex:none;margin:0}
+
   /* ---------- toast ---------- */
   .toast{position:absolute;left:50%;bottom:96px;transform:translate(-50%,14px);z-index:90;background:rgba(20,24,32,.94);
     color:#fff;font-size:13px;font-weight:600;padding:11px 16px;border-radius:10px;max-width:82%;text-align:center;
@@ -837,6 +850,16 @@
       </div><!-- /views -->
 
       <!-- signature modal -->
+      <!-- clock-in popup: pick the truck, that's it -->
+      <div class="modal" id="clockModal">
+        <div class="sheet">
+          <h4>Clock in</h4>
+          <p class="sp">Which truck are you driving today?</p>
+          <div class="trucks" id="truckList"></div>
+          <div class="sheetrow"><button class="clear" data-ci-cancel>Cancel</button></div>
+        </div>
+      </div>
+
       <div class="modal" id="sigModal">
         <div class="sheet">
           <h4 data-sig-title>Signature</h4>
@@ -941,7 +964,6 @@
     { reg:'191-KE-2210', name:'DAF CF 8-wheel tipper',    type:'Rigid', odo:288140 },
     { reg:'162-KE-9073', name:'Volvo FH artic tipper',    type:'Artic', odo:530611 }
   ];
-  var STARTS = ['Yard — David Allman Haulage','Kildare Quarry','Blessington Sand Pit','Clondalkin Site 4','Naas Road Depot'];
 
   /* daily walkaround — the Shannon Valley vehicle checks, widened for a tipper lorry */
   var CHECK_ITEMS = [
@@ -1042,7 +1064,7 @@
       var reg = d === 4 ? '191-KE-2210' : USER.reg;
       var st = d % 3 === 0 ? '06:45' : '07:05';
       var en = day.getDay() === 6 ? '13:10' : (d % 2 ? '17:20' : '16:35');
-      shifts.push({ date:date, startTs:at(date, st), endTs:at(date, en), reg:reg, from:STARTS[0] });
+      shifts.push({ date:date, startTs:at(date, st), endTs:at(date, en), reg:reg });
       var items = {};
       CHECK_ITEMS.forEach(function(it){ items[it.id] = { s:'pass', note:'' }; });
       if(lorry(reg).type === 'Rigid') items.coupling = { s:'na', note:'' };
@@ -1546,14 +1568,35 @@
               : 'Not on the clock · ' + hhmm(new Date());
   }
 
-  function clockIn(reg, from){
+  function clockIn(reg){
     if(shiftOn()) return toast('You&rsquo;re already on the clock');
     var now = Date.now();
-    state.shifts.push({ date:TODAY, startTs:now, endTs:null, reg:reg, from:from });
+    state.shifts.push({ date:TODAY, startTs:now, endTs:null, reg:reg });
     persist();
     toast('Clocked in at ' + hhmm(new Date(now)) + ' &mdash; ' + reg);
-    go('home');
+    go(currentView);   // stay where the popup was opened, just refreshed
   }
+  /* the popup: one tap on a truck clocks you in. The last truck you drove is listed first. */
+  var clockModal = document.getElementById('clockModal');
+  function openClockIn(){
+    if(shiftOn()) return toast('You&rsquo;re already on the clock');
+    var lastReg = (state.shifts.slice().sort(function(a, b){ return b.startTs - a.startTs; })[0] || {}).reg;
+    var list = FLEET.slice().sort(function(a, b){ return (b.reg === lastReg) - (a.reg === lastReg); });
+    document.getElementById('truckList').innerHTML = list.map(function(v){
+      var c = checkToday(v.reg);
+      return '<button class="truck" data-truck="' + v.reg + '"><span class="ti">' + I.TRUCK + '</span>' +
+        '<span class="tt"><b>' + v.reg + '</b><small>' + esc(v.name) + '</small></span>' +
+        (v.reg === lastReg ? '<span class="tag ok">Last used</span>' : '') +
+        (c ? '<span class="tag ok">Checked</span>' : '') + '</button>';
+    }).join('');
+    clockModal.classList.add('on');
+  }
+  clockModal.addEventListener('click', function(e){
+    var t = e.target.closest('[data-truck]');
+    if(t){ clockModal.classList.remove('on'); clockIn(t.getAttribute('data-truck')); return; }
+    if(e.target === clockModal || e.target.closest('[data-ci-cancel]')) clockModal.classList.remove('on');
+  });
+
   function clockOut(){
     var sh = shiftOn();
     if(!sh) return;
@@ -1569,7 +1612,7 @@
       '<div class="cbstate"><span class="d' + (sh ? ' on' : '') + '"></span><span data-tick-band>' + bandText() + '</span></div>' +
       '<div class="cbacts">' +
         (sh ? '<button class="stop" data-clockout>' + I.STOP + 'Clock Out</button>'
-            : '<button class="go" data-nav="hours">' + I.PLAY + 'Clock In</button>') +
+            : '<button class="go" data-clockpick>' + I.PLAY + 'Clock In</button>') +
         '<button class="soft" data-nav="hours">' + I.CLOCK + 'Hours</button>' +
       '</div>';
 
@@ -1598,17 +1641,10 @@
     if(sh){
       var lr = lorry(sh.reg);
       html += '<div class="onsite"><div class="lbl">On the clock</div><div class="el" data-tick-el>' + hms(Date.now() - sh.startTs) + '</div>' +
-              '<div class="where"><b style="font-family:var(--mono)">' + esc(sh.reg) + '</b> &middot; ' + esc(lr.name) + '<br>From ' + esc(sh.from) +
-              ' &middot; since ' + hhmm(new Date(sh.startTs)) + '</div></div>' +
+              '<div class="where"><b style="font-family:var(--mono)">' + esc(sh.reg) + '</b> &middot; ' + esc(lr.name) + '<br>Since ' + hhmm(new Date(sh.startTs)) + '</div></div>' +
               '<button class="bigbtn out" data-clockout>' + I.STOP + 'Clock out</button>';
     } else {
-      html += '<div class="card"><h4>Clock in</h4><p class="lead">Pick the lorry you&rsquo;re driving today and where you&rsquo;re starting from.</p>' +
-              '<div class="flabel">Lorry <span class="req">*</span></div><select class="control" id="ciReg">' +
-                FLEET.map(function(v){ return '<option value="' + v.reg + '">' + v.reg + ' — ' + esc(v.name) + '</option>'; }).join('') + '</select>' +
-              '<div class="flabel">Starting from <span class="req">*</span></div><select class="control" id="ciFrom">' +
-                STARTS.map(function(x){ return '<option>' + esc(x) + '</option>'; }).join('') + '</select>' +
-              '</div>' +
-              '<button class="bigbtn in" data-clockin>' + I.PLAY + 'Clock in</button>';
+      html += '<button class="bigbtn in" data-clockpick>' + I.PLAY + 'Clock in</button>';
     }
 
     /* last seven days, newest first */
@@ -1855,7 +1891,7 @@
   function renderPickerNudge(){
     var el = document.getElementById('pickerNudge'), sh = shiftOn();
     if(!sh){
-      el.innerHTML = '<div class="nudge">' + I.CLOCK + '<span>You&rsquo;re not clocked in</span><button data-nav="hours">Clock in</button></div>';
+      el.innerHTML = '<div class="nudge">' + I.CLOCK + '<span>You&rsquo;re not clocked in</span><button data-clockpick>Clock in</button></div>';
     } else if(!checkToday(sh.reg)){
       el.innerHTML = '<div class="nudge">' + I.WARN + '<span>Daily check not done on ' + esc(sh.reg) + '</span><button data-startcheck>Do it now</button></div>';
     } else { el.innerHTML = ''; }
@@ -1875,9 +1911,9 @@
 
   /* clock + check taps that live outside the check form */
   document.addEventListener('click', function(e){
-    var t = e.target.closest('[data-clockin],[data-clockout],[data-startcheck],[data-openck]');
+    var t = e.target.closest('[data-clockpick],[data-clockout],[data-startcheck],[data-openck]');
     if(!t) return;
-    if(t.hasAttribute('data-clockin')) clockIn(document.getElementById('ciReg').value, document.getElementById('ciFrom').value);
+    if(t.hasAttribute('data-clockpick')) openClockIn();
     if(t.hasAttribute('data-clockout')) clockOut();
     if(t.hasAttribute('data-startcheck')) startCheck();
     if(t.hasAttribute('data-openck')) openCheck(t.getAttribute('data-openck'));
@@ -1929,6 +1965,7 @@
     state = seed(); cur = null; ck = null;
     Object.keys(qEls).forEach(function(k){ qEls[k].value = ''; q[k] = ''; });
     modal.classList.remove('on');
+    clockModal.classList.remove('on');
     go('signin');
     toast('Demo reset');
   });

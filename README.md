@@ -14,7 +14,8 @@ requests.
 | --- | --- | --- |
 | 1 | **Sign In** | A single Employee button, which signs in as the demo driver |
 | 2 | **Dashboard** | Clock band at the top (status, Clock In / Clock Out, Hours), a reminder when the day's vehicle check isn't done, today's loads, tonnes and open drafts, and two tiles: Vehicle Check and Agg Loads |
-| — | **Hours** | Big clock and date. Off the clock: pick the lorry and where you're starting from, then Clock in. On the clock: a live HH:MM:SS timer, the lorry and the start point, and a red Clock out. Underneath is the last 7 days of shifts with a total |
+| — | **Clock in popup** | Clock In (on the dashboard band, the Hours screen or the New Load reminder) opens a popup listing the trucks. One tap on a truck clocks you in. The last truck you drove is listed first and marked *Last used* |
+| — | **Hours** | Big clock and date. On the clock: a live HH:MM:SS timer, the truck and the start time, and a red Clock out. Underneath is the last 7 days of shifts with a total |
 | — | **Checks** | Today's status for the lorry you're clocked in on, a Start daily check button and the recent checks. Each one opens read only |
 | — | **Daily Vehicle Check** | Lorry (fills the type and last odometer reading), odometer and trailer no. Then 15 walkaround items, each OK / Fault / N/A; tap a button again to clear it. A Fault needs a note, and the trailer coupling is preset to N/A on a rigid. Also a "Nil defects" shortcut, live Pass / Defects / To do counts, a "safe to drive?" question when there's a fault, up to 6 photos and the driver signature |
 | 3 | **Active Loads** | Seeded loads with drafts listed first. Filters for search (docket no. or customer), date range, status and collection type, plus an active-filter count |
