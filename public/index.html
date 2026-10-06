@@ -407,20 +407,7 @@
   .tag.ok{background:var(--green-soft);color:var(--green)}
   .tag.bad{background:#FDECEC;color:var(--err)}
 
-  /* ---------- hours screen ---------- */
-  .clockcard{margin:14px 16px 12px;background:#fff;border-radius:18px;box-shadow:var(--shadow);padding:22px 16px;text-align:center}
-  .clockcard .time{font-size:52px;font-weight:800;letter-spacing:-.045em;line-height:1;font-variant-numeric:tabular-nums}
-  .clockcard .date{color:var(--sub);font-size:14px;margin-top:6px}
-  .onsite{margin:0 16px 12px;background:var(--green-soft);border-radius:16px;padding:16px;text-align:center}
-  .onsite .lbl{font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;font-weight:800;color:var(--green)}
-  .onsite .el{font-size:38px;font-weight:800;color:var(--green);letter-spacing:-.04em;line-height:1.1;font-variant-numeric:tabular-nums;margin-top:2px}
-  .onsite .where{font-size:13.5px;color:var(--sub);margin-top:6px;line-height:1.4}
-  .bigbtn{display:flex;align-items:center;justify-content:center;gap:10px;width:calc(100% - 32px);margin:0 16px 14px;padding:19px;
-    border-radius:16px;border:0;font-size:18px;font-weight:800;cursor:pointer}
-  .bigbtn svg{width:22px;height:22px}
-  .bigbtn.in{background:var(--green);color:#fff}
-  .bigbtn.out{background:var(--err);color:#fff}
-  .bigbtn:active{filter:brightness(.95)}
+  /* ---------- list cards (Checks) ---------- */
   .card{margin:0 16px 12px;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:14px 16px}
   .card h4{margin:0 0 4px;font-size:15px;font-weight:800;display:flex;justify-content:space-between;align-items:baseline;gap:10px}
   .card h4 span{color:var(--sub);font-weight:700;font-size:12.5px}
@@ -828,24 +815,6 @@
           <div class="formfoot" id="detailFoot"></div>
         </section>
 
-        <!-- ---------- HOURS (clock in / out) ---------- -->
-        <section class="view" data-view="hours">
-          <div class="apphead">
-            <button class="circ" data-nav="home" aria-label="Home">%HOME%</button>
-            <span class="brand sm"><span class="nm">DAVID ALLMAN</span><span class="st">HAULAGE</span></span>
-            <button class="grid4" data-nav="home" aria-label="Modules"><i></i><i></i><i></i><i></i></button>
-          </div>
-          <div class="scroll">
-            <div class="clockcard">
-              <div class="time" data-tick-now>--:--</div>
-              <div class="date" data-longdate>&mdash;</div>
-            </div>
-            <div id="hoursBody"></div>
-            <div style="height:6px"></div>
-          </div>
-          <nav class="bottomnav" data-tabs="hours"></nav>
-        </section>
-
         <!-- ---------- VEHICLE CHECKS (list) ---------- -->
         <section class="view" data-view="checks">
           <div class="apphead">
@@ -1066,10 +1035,6 @@
   function at(isoDate, hm){ return new Date(isoDate + 'T' + hm + ':00').getTime(); }
   function addMin(hm, m){ var t = +hm.slice(0,2) * 60 + +hm.slice(3) + m; return p2(Math.floor(t / 60)) + ':' + p2(t % 60); }
   function dur(ms){ var m = Math.max(0, Math.floor(ms / 60000)); return Math.floor(m / 60) + 'h ' + p2(m % 60) + 'm'; }
-  function hms(ms){ var t = Math.max(0, Math.floor(ms / 1000)); return p2(Math.floor(t / 3600)) + ':' + p2(Math.floor(t / 60) % 60) + ':' + p2(t % 60); }
-  var DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-  var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-  function longDate(d){ return DAYS[d.getDay()] + ' ' + d.getDate() + ' ' + MONTHS[d.getMonth()] + ' ' + d.getFullYear(); }
   var TODAY = iso(NOW);
 
   /* fake signature + docket image so the seeded loads look real */
@@ -1115,7 +1080,7 @@
       delete o.custName;
       return o;
     }
-    /* the last week of shifts and walkarounds, so Hours and Checks have history */
+    /* the last week of shifts and walkarounds, so Checks has history */
     var shifts = [], checks = [], odo = {}, n = 1;
     FLEET.forEach(function(v){ odo[v.reg] = v.odo; });
     for(var d = 6; d >= 1; d--){
@@ -1182,7 +1147,6 @@
     if(sc) sc.scrollTop = 0;
     if(name === 'home' || name === 'loads') renderLoads();
     if(name === 'home') renderHome();
-    if(name === 'hours') renderHours();
     if(name === 'checks') renderChecks();
     if(name === 'picker') renderPickerNudge();
     if(name === 'step3') renderSummary();
@@ -1195,7 +1159,6 @@
     switch(currentView){
       case 'signin': return 0;
       case 'home':   return !s ? 1 : (checkToday(s.reg) ? 3 : 2);
-      case 'hours':  return s ? 9 : 1;
       case 'checks': case 'check': case 'checkview': return 2;
       case 'loads':  case 'detail': return 3;
       case 'picker': return 4;
@@ -1668,7 +1631,7 @@
     sh.endTs = Date.now();
     persist();
     toast('Clocked out &mdash; ' + dur(sh.endTs - sh.startTs) + ' on the clock');
-    go(currentView === 'hours' ? 'hours' : 'home');
+    go(currentView);
   }
 
   function renderHome(){
@@ -1678,7 +1641,6 @@
       '<div class="cbacts">' +
         (sh ? '<button class="stop" data-clockout>' + I.STOP + 'Clock Out</button>'
             : '<button class="go" data-clockpick>' + I.PLAY + 'Clock In</button>') +
-        '<button class="soft" data-nav="hours">' + I.CLOCK + 'Hours</button>' +
       '</div>';
 
     /* the walkaround nudge — never a hard block, same as the earlier demos */
@@ -1697,35 +1659,6 @@
     tag.className = 'tag ' + (done ? (done.defects ? 'bad' : 'ok') : 'due');
     tag.textContent = done ? 'Done ' + done.time + ' · ' + (done.defects ? done.defects + ' defect' + (done.defects === 1 ? '' : 's') : 'nil defects')
                            : (reg ? 'Due today · ' + reg : 'Due today');
-  }
-
-  function renderHours(){
-    var sh = shiftOn();
-    document.querySelector('[data-longdate]').textContent = longDate(new Date());
-    var html = '';
-    if(sh){
-      var lr = lorry(sh.reg);
-      html += '<div class="onsite"><div class="lbl">On the clock</div><div class="el" data-tick-el>' + hms(Date.now() - sh.startTs) + '</div>' +
-              '<div class="where"><b style="font-family:var(--mono)">' + esc(sh.reg) + '</b> &middot; ' + esc(lr.name) + '<br>' + esc(sh.role || 'Driver') + ' &middot; since ' + hhmm(new Date(sh.startTs)) + '</div></div>' +
-              '<button class="bigbtn out" data-clockout>' + I.STOP + 'Clock out</button>';
-    } else {
-      html += '<button class="bigbtn in" data-clockpick>' + I.PLAY + 'Clock in</button>';
-    }
-
-    /* last seven days, newest first */
-    var since = daysAgo(6), total = 0;
-    var rows = state.shifts.filter(function(x){ return x.date >= since; })
-      .sort(function(a, b){ return b.startTs - a.startTs; })
-      .map(function(x){
-        var d = new Date(x.startTs), ms = (x.endTs || Date.now()) - x.startTs;
-        total += ms;
-        return '<div class="srow"><span class="l"><b>' + DAYS[d.getDay()] + (x.date === TODAY ? ' &middot; today' : '') + '</b>' +
-          '<small>' + hhmm(d) + '&ndash;' + (x.endTs ? hhmm(new Date(x.endTs)) : 'still on') + ' &middot; ' + esc(x.reg) + '</small></span>' +
-          '<span class="r">' + (x.endTs ? dur(ms) : '<span class="pill run">Running</span>') + '<small>' + nice(x.date).slice(0, 5) + '</small></span></div>';
-      });
-    html += '<div class="card"><h4>Last 7 days <span>' + dur(total) + '</span></h4>' +
-            (rows.length ? rows.join('') : '<p class="lead" style="margin:6px 0 0">No shifts yet.</p>') + '</div>';
-    document.getElementById('hoursBody').innerHTML = html;
   }
 
   /* ================================================================
@@ -1983,7 +1916,7 @@
   }
 
   /* bottom tabs, shared by every main screen */
-  var TABS = [['home','HOME','Dashboard'],['loads','TRUCK','Agg Loads'],['checks','CHECKLIST','Checks'],['hours','CLOCK','Hours']];
+  var TABS = [['home','HOME','Dashboard'],['loads','TRUCK','Agg Loads'],['checks','CHECKLIST','Checks']];
   Array.prototype.forEach.call(document.querySelectorAll('[data-tabs]'), function(nav){
     nav.innerHTML = TABS.map(function(t){ return '<button class="navbtn" data-nav="' + t[0] + '">' + I[t[1]] + t[2] + '</button>'; }).join('');
   });
@@ -2055,12 +1988,10 @@
   });
 
   function tick(){
-    var now = new Date(), sh = shiftOn();
+    var now = new Date();
     document.getElementById('clock').textContent = hhmm(now);
-    setAll('data-tick-now', hhmm(now));
     setAll('data-tick-sec', hhmm(now) + ':' + p2(now.getSeconds()));
     setAll('data-tick-band', bandText());
-    if(sh) setAll('data-tick-el', hms(Date.now() - sh.startTs));
   }
   tick(); setInterval(tick, 1000);
 
