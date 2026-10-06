@@ -1784,8 +1784,8 @@
 
       '<div class="sec-head">Driver signature <span style="color:var(--err)">*</span></div>' +
       '<button class="sig-btn' + (ck.sig ? ' signed' : '') + (ck.tried && !ck.sig ? ' bad' : '') + '" data-sig="check">' +
-        '<span class="si">' + I.PEN + '</span><span class="st2"><b>I&rsquo;ve walked round this lorry</b><span>' +
-        (ck.sig ? 'Signed — ' + esc(ck.sig.name) + ' · tap to re-sign' : 'Tap to sign') + '</span></span>' +
+        '<span class="si">' + I.PEN + '</span><span class="st2"><b>' +
+        (ck.sig ? 'Signed — ' + esc(ck.sig.name) : 'Tap to sign') + '</b>' + (ck.sig ? '<span>Tap to re-sign</span>' : '') + '</span>' +
         (ck.sig ? '<img alt="" src="' + ck.sig.img + '">' : '<img alt="">') + '</button>';
     sc.scrollTop = keep;
   }
