@@ -497,18 +497,30 @@
     font-weight:700;display:flex;gap:10px;align-items:center;line-height:1.35;text-align:left}
   .nudge button{margin-left:auto;flex:none;border:0;background:#111;color:var(--orange);border-radius:9px;padding:9px 11px;font-size:12.5px;font-weight:800;cursor:pointer}
 
-  /* ---------- clock-in popup ---------- */
-  .trucks{display:flex;flex-direction:column;gap:9px}
-  .truck{display:flex;align-items:center;gap:12px;width:100%;background:#fff;border:1.5px solid var(--field-line);border-radius:13px;
-    padding:13px;cursor:pointer;text-align:left;font-family:inherit;color:var(--ink);transition:.12s}
-  .truck:hover{border-color:var(--orange)}
-  .truck:active{transform:scale(.985);background:var(--orange-soft)}
-  .truck .ti{flex:none;width:44px;height:44px;border-radius:12px;background:var(--orange);color:#111;display:grid;place-items:center}
-  .truck .ti svg{width:24px;height:24px}
-  .truck .tt{flex:1;min-width:0}
-  .truck .tt b{display:block;font-family:var(--mono);font-size:15.5px;font-weight:800;letter-spacing:.03em}
-  .truck .tt small{display:block;font-size:12.5px;color:var(--sub);font-weight:600;margin-top:2px}
-  .truck .tag{flex:none;margin:0}
+  /* ---------- clock-in popup (matches the app's Update Timesheet sheet) ---------- */
+  .tsheet{width:100%;background:#fff;border-radius:22px 22px 40px 40px;padding:10px 20px 24px;animation:up .24s ease}
+  .tsheet .grab{width:42px;height:5px;border-radius:3px;background:#D4D6DA;margin:0 auto 16px}
+  .tsheet .hd{display:flex;align-items:flex-start;gap:12px}
+  .tsheet .hd div{flex:1;min-width:0}
+  .tsheet h4{margin:0;font-size:22px;font-weight:800;letter-spacing:-.02em}
+  .tsheet .hd p{margin:3px 0 0;font-size:14px;color:var(--sub)}
+  .tsheet .x{flex:none;width:40px;height:40px;border-radius:50%;border:0;background:var(--field);color:var(--sub);
+    display:grid;place-items:center;cursor:pointer}
+  .tsheet .x svg{width:18px;height:18px}
+  .tsheet .rule{height:4px;border-radius:2px;background:var(--orange);margin:14px 0 6px}
+  .tsheet label{display:block;font-size:15px;font-weight:700;color:var(--ink);margin:16px 0 8px 16px}
+  .tsheet select{width:100%;font-family:inherit;font-size:16px;color:var(--ink);background-color:var(--field);
+    border:1.5px solid #1C222E;border-radius:14px;padding:15px 44px 15px 16px;appearance:none;-webkit-appearance:none;cursor:pointer;
+    background-image:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231C222E' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right 14px center;background-size:20px}
+  .tsheet select.empty{color:var(--sub)}
+  .tsheet select,.tsheet option{text-align:left;text-align-last:left}
+  .tsheet select.bad{border-color:var(--err);background-color:#FFF6F6}
+  .tsheet .acts{display:flex;gap:12px;margin-top:24px}
+  .tsheet .acts button{flex:1;border:0;border-radius:14px;padding:16px;font-size:16px;font-weight:800;cursor:pointer}
+  .tsheet .acts .cancel{background:var(--field);color:var(--sub)}
+  .tsheet .acts .submit{background:#111;color:#fff}
+  .tsheet .acts button:active{transform:translateY(1px)}
 
   /* ---------- toast ---------- */
   .toast{position:absolute;left:50%;bottom:96px;transform:translate(-50%,14px);z-index:90;background:rgba(20,24,32,.94);
@@ -850,13 +862,23 @@
       </div><!-- /views -->
 
       <!-- signature modal -->
-      <!-- clock-in popup: pick the truck, that's it -->
+      <!-- clock-in popup, laid out like the app's Update Timesheet sheet -->
       <div class="modal" id="clockModal">
-        <div class="sheet">
-          <h4>Clock in</h4>
-          <p class="sp">Which truck are you driving today?</p>
-          <div class="trucks" id="truckList"></div>
-          <div class="sheetrow"><button class="clear" data-ci-cancel>Cancel</button></div>
+        <div class="tsheet" role="dialog" aria-labelledby="ciTitle">
+          <div class="grab"></div>
+          <div class="hd">
+            <div><h4 id="ciTitle">Clock In</h4><p>Select your role and truck</p></div>
+            <button class="x" data-ci-cancel aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+          </div>
+          <div class="rule"></div>
+          <label for="ciRole">Job Type</label>
+          <select id="ciRole"><option>Driver</option><option>Loader Operator</option><option>Yard / General</option></select>
+          <label for="ciTruck">Select Vehicle</label>
+          <select id="ciTruck"></select>
+          <div class="acts">
+            <button class="cancel" data-ci-cancel>Cancel</button>
+            <button class="submit" id="ciSubmit">Submit</button>
+          </div>
         </div>
       </div>
 
@@ -1568,32 +1590,37 @@
               : 'Not on the clock · ' + hhmm(new Date());
   }
 
-  function clockIn(reg){
+  function clockIn(reg, role){
     if(shiftOn()) return toast('You&rsquo;re already on the clock');
     var now = Date.now();
-    state.shifts.push({ date:TODAY, startTs:now, endTs:null, reg:reg });
+    state.shifts.push({ date:TODAY, startTs:now, endTs:null, reg:reg, role:role });
     persist();
-    toast('Clocked in at ' + hhmm(new Date(now)) + ' &mdash; ' + reg);
+    toast('Clocked in at ' + hhmm(new Date(now)) + ' &mdash; ' + role + ', ' + reg);
     go(currentView);   // stay where the popup was opened, just refreshed
   }
-  /* the popup: one tap on a truck clocks you in. The last truck you drove is listed first. */
+  /* the popup: job type (Driver by default) and the truck, then Submit */
   var clockModal = document.getElementById('clockModal');
+  var ciTruck = document.getElementById('ciTruck'), ciRole = document.getElementById('ciRole');
   function openClockIn(){
     if(shiftOn()) return toast('You&rsquo;re already on the clock');
-    var lastReg = (state.shifts.slice().sort(function(a, b){ return b.startTs - a.startTs; })[0] || {}).reg;
-    var list = FLEET.slice().sort(function(a, b){ return (b.reg === lastReg) - (a.reg === lastReg); });
-    document.getElementById('truckList').innerHTML = list.map(function(v){
-      var c = checkToday(v.reg);
-      return '<button class="truck" data-truck="' + v.reg + '"><span class="ti">' + I.TRUCK + '</span>' +
-        '<span class="tt"><b>' + v.reg + '</b><small>' + esc(v.name) + '</small></span>' +
-        (v.reg === lastReg ? '<span class="tag ok">Last used</span>' : '') +
-        (c ? '<span class="tag ok">Checked</span>' : '') + '</button>';
+    ciRole.value = 'Driver';
+    ciTruck.innerHTML = '<option value="">Select Truck</option>' + FLEET.map(function(v){
+      return '<option value="' + v.reg + '">' + v.reg + ' — ' + esc(v.name) + '</option>';
     }).join('');
+    ciTruck.classList.add('empty');
+    ciTruck.classList.remove('bad');
     clockModal.classList.add('on');
   }
+  ciTruck.addEventListener('change', function(){
+    ciTruck.classList.toggle('empty', !ciTruck.value);
+    ciTruck.classList.remove('bad');
+  });
+  document.getElementById('ciSubmit').addEventListener('click', function(){
+    if(!ciTruck.value){ ciTruck.classList.add('bad'); return toast('Select your truck'); }
+    clockModal.classList.remove('on');
+    clockIn(ciTruck.value, ciRole.value);
+  });
   clockModal.addEventListener('click', function(e){
-    var t = e.target.closest('[data-truck]');
-    if(t){ clockModal.classList.remove('on'); clockIn(t.getAttribute('data-truck')); return; }
     if(e.target === clockModal || e.target.closest('[data-ci-cancel]')) clockModal.classList.remove('on');
   });
 
@@ -1641,7 +1668,7 @@
     if(sh){
       var lr = lorry(sh.reg);
       html += '<div class="onsite"><div class="lbl">On the clock</div><div class="el" data-tick-el>' + hms(Date.now() - sh.startTs) + '</div>' +
-              '<div class="where"><b style="font-family:var(--mono)">' + esc(sh.reg) + '</b> &middot; ' + esc(lr.name) + '<br>Since ' + hhmm(new Date(sh.startTs)) + '</div></div>' +
+              '<div class="where"><b style="font-family:var(--mono)">' + esc(sh.reg) + '</b> &middot; ' + esc(lr.name) + '<br>' + esc(sh.role || 'Driver') + ' &middot; since ' + hhmm(new Date(sh.startTs)) + '</div></div>' +
               '<button class="bigbtn out" data-clockout>' + I.STOP + 'Clock out</button>';
     } else {
       html += '<button class="bigbtn in" data-clockpick>' + I.PLAY + 'Clock in</button>';
