@@ -162,14 +162,14 @@
     font-size:11.5px;font-weight:700;color:var(--sub);display:flex;justify-content:space-between}
 
   /* ---------- home ---------- */
-  .hello{margin:16px 16px 16px;background:linear-gradient(135deg,#111111,#2E2E2E);border-left:5px solid var(--orange);color:#fff;border-radius:var(--radius);
+  .hello{margin:0 16px 0;background:linear-gradient(135deg,#111111,#2E2E2E);border-left:5px solid var(--orange);color:#fff;border-radius:var(--radius);
     padding:18px;box-shadow:0 14px 28px -18px rgba(17,17,17,.9)}
   .hello small{font-size:12px;opacity:.85;font-weight:600}
   .hello b{display:block;font-size:21px;font-weight:800;margin:3px 0 12px;letter-spacing:-.01em}
   .hello .hs{display:flex;gap:10px}
   .hello .hs span{flex:1;background:rgba(255,255,255,.16);border-radius:10px;padding:9px 10px;font-size:11.5px;font-weight:600}
   .hello .hs strong{display:block;font-size:19px;font-weight:800;color:var(--orange)}
-  .modgrid{display:grid;grid-template-columns:1fr;margin:0 16px}
+  .modgrid{display:grid;grid-template-columns:1fr;gap:11px;margin:14px 16px 0}
   .modgrid .mod{flex-direction:row;justify-content:flex-start;gap:14px;padding:16px;font-size:17px;text-align:left}
   .modgrid .mod small{display:block;font-size:12.5px;font-weight:600;color:var(--sub);margin-top:3px}
   .modgrid .mod .chev{margin-left:auto;color:var(--faint)}
@@ -382,6 +382,121 @@
   .sheetrow .save{border:0;background:var(--red);color:#fff}
   .sheetrow .save:disabled{background:#C9CDD4;cursor:not-allowed}
 
+  /* ---------- clock band (from the Donohoe home band) ---------- */
+  .clockband{margin:14px 16px 0;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:14px}
+  .cbstate{display:flex;align-items:center;gap:9px;font-size:13.5px;font-weight:700;color:var(--sub);
+    padding:0 2px 12px;font-variant-numeric:tabular-nums}
+  .cbstate .d{width:9px;height:9px;flex:none;border-radius:50%;background:var(--faint)}
+  .cbstate .d.on{background:var(--green);box-shadow:0 0 0 3px rgba(25,154,91,.18)}
+  .cbacts{display:flex;gap:10px}
+  .cbacts button{flex:1;min-width:0;border:0;border-radius:12px;padding:14px 10px;font-size:15.5px;font-weight:800;
+    cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px}
+  .cbacts button:active{transform:translateY(1px)}
+  .cbacts svg{width:19px;height:19px}
+  .cbacts .go{background:var(--green);color:#fff}
+  .cbacts .stop{background:var(--err);color:#fff}
+  .cbacts .soft{flex:0 0 auto;padding:14px 16px;background:var(--field);color:var(--ink);border:1px solid var(--field-line)}
+  .duebar{margin:12px 16px 0;background:var(--amber-soft);border:1px solid #F1D7A6;color:var(--amber);border-radius:12px;
+    padding:11px 12px;font-size:13px;font-weight:700;display:flex;gap:10px;align-items:center;line-height:1.35}
+  .duebar svg{width:20px;height:20px;flex:none}
+  .duebar button{margin-left:auto;flex:none;border:0;background:#111;color:var(--orange);border-radius:9px;padding:9px 11px;
+    font-size:12.5px;font-weight:800;cursor:pointer}
+  .duebar.ok{background:var(--green-soft);border-color:#BFE5CE;color:var(--green)}
+  .mod .tag{display:inline-block;margin-top:5px;font-size:10.5px;font-weight:800;padding:3px 8px;border-radius:999px}
+  .tag.due{background:var(--amber-soft);color:var(--amber)}
+  .tag.ok{background:var(--green-soft);color:var(--green)}
+  .tag.bad{background:#FDECEC;color:var(--err)}
+
+  /* ---------- hours screen ---------- */
+  .clockcard{margin:14px 16px 12px;background:#fff;border-radius:18px;box-shadow:var(--shadow);padding:22px 16px;text-align:center}
+  .clockcard .time{font-size:52px;font-weight:800;letter-spacing:-.045em;line-height:1;font-variant-numeric:tabular-nums}
+  .clockcard .date{color:var(--sub);font-size:14px;margin-top:6px}
+  .onsite{margin:0 16px 12px;background:var(--green-soft);border-radius:16px;padding:16px;text-align:center}
+  .onsite .lbl{font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;font-weight:800;color:var(--green)}
+  .onsite .el{font-size:38px;font-weight:800;color:var(--green);letter-spacing:-.04em;line-height:1.1;font-variant-numeric:tabular-nums;margin-top:2px}
+  .onsite .where{font-size:13.5px;color:var(--sub);margin-top:6px;line-height:1.4}
+  .bigbtn{display:flex;align-items:center;justify-content:center;gap:10px;width:calc(100% - 32px);margin:0 16px 14px;padding:19px;
+    border-radius:16px;border:0;font-size:18px;font-weight:800;cursor:pointer}
+  .bigbtn svg{width:22px;height:22px}
+  .bigbtn.in{background:var(--green);color:#fff}
+  .bigbtn.out{background:var(--err);color:#fff}
+  .bigbtn:active{filter:brightness(.95)}
+  .card{margin:0 16px 12px;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:14px 16px}
+  .card h4{margin:0 0 4px;font-size:15px;font-weight:800;display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+  .card h4 span{color:var(--sub);font-weight:700;font-size:12.5px}
+  .card .flabel:first-of-type{margin-top:6px}
+  .card p.lead{margin:0 0 12px;font-size:13px;color:var(--sub);line-height:1.45}
+  .srow{display:flex;align-items:center;gap:10px;width:100%;padding:11px 0;border:0;border-bottom:1px solid var(--line);
+    background:none;text-align:left;font-family:inherit;color:var(--ink);font-size:13px}
+  .srow:last-child{border-bottom:0}
+  button.srow{cursor:pointer}
+  .srow .l{flex:1;min-width:0}
+  .srow .l b{display:block;font-weight:800}
+  .srow .l small{display:block;color:var(--sub);font-weight:600;font-size:11.5px;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .srow .r{flex:none;text-align:right;font-weight:800;font-variant-numeric:tabular-nums}
+  .srow .r small{display:block;color:var(--sub);font-weight:600;font-size:11px;margin-top:2px}
+  .srow .chev{flex:none;color:var(--faint)}
+  .srow .chev svg{width:16px;height:16px;display:block}
+  .pill.ok{background:var(--green-soft);color:var(--green)}
+  .pill.bad{background:#FDECEC;color:var(--err)}
+  .pill.run{background:var(--green-soft);color:var(--green)}
+
+  /* ---------- vehicle checklist (Donohoe layout, Shannon Valley pass / fail / n/a) ---------- */
+  .ckhint{margin:6px 0 0;font-size:12px;color:var(--faint);line-height:1.45}
+  .ckmeta{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .cksum{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}
+  .cksum div{background:#fff;border:1px solid var(--line);border-radius:11px;padding:8px;text-align:center;font-size:11.5px;font-weight:700;color:var(--sub)}
+  .cksum b{display:block;font-size:20px;color:var(--ink);font-variant-numeric:tabular-nums}
+  .cksum .p b{color:var(--green)}
+  .cksum .f b{color:var(--err)}
+  .nilbtn{width:100%;border:1.5px solid var(--green);background:var(--green-soft);color:var(--green);border-radius:11px;padding:12px;
+    font-size:14px;font-weight:800;cursor:pointer;margin-bottom:12px;display:flex;align-items:center;justify-content:center;gap:8px}
+  .nilbtn svg{width:16px;height:16px}
+  .nilbtn.clear{border-color:var(--field-line);background:#fff;color:var(--sub)}
+  .clhead{display:flex;align-items:center;background:#111;color:var(--orange);font-size:11.5px;font-weight:800;letter-spacing:.05em;
+    text-transform:uppercase;border-radius:11px 11px 0 0;padding:11px 12px}
+  .clhead .c1{flex:1}
+  .clhead .c2{flex:0 0 122px;display:flex;justify-content:space-between;text-align:center}
+  .clhead .c2 span{width:38px}
+  .cllist{background:#fff;border:1px solid var(--line);border-top:0;border-radius:0 0 11px 11px;overflow:hidden}
+  .clrow{padding:10px 12px;border-bottom:1px solid var(--line)}
+  .clrow:last-child{border-bottom:0}
+  .clrow .top{display:flex;align-items:center;gap:8px}
+  .clrow .lb{flex:1;min-width:0;font-size:13.5px;font-weight:650;line-height:1.3}
+  .clrow .lb small{display:block;color:var(--faint);font-size:11px;font-weight:600;margin-top:2px}
+  .clrow.fail{background:#FFF6F6}
+  .clrow.miss{box-shadow:inset 3px 0 0 var(--err)}
+  .clrow .note{margin-top:8px;padding:10px 11px;font-size:13.5px;background:#fff}
+  .tri{display:flex;gap:4px;flex:0 0 122px}
+  .tri button{width:38px;height:34px;border-radius:8px;border:1.5px solid var(--field-line);background:var(--field);font-size:11px;
+    font-weight:800;color:var(--sub);cursor:pointer;display:grid;place-items:center;padding:0}
+  .tri svg{width:15px;height:15px}
+  .tri .on-pass{background:var(--green);border-color:var(--green);color:#fff}
+  .tri .on-fail{background:var(--err);border-color:var(--err);color:#fff}
+  .tri .on-na{background:#6B7280;border-color:#6B7280;color:#fff}
+  .safe{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .safe button{border:1.5px solid var(--field-line);background:#fff;border-radius:11px;padding:12px 8px;font-size:13.5px;font-weight:800;
+    color:var(--sub);cursor:pointer;line-height:1.25}
+  .safe button small{display:block;font-size:11px;font-weight:600;margin-top:2px}
+  .safe button.on.y{background:var(--green-soft);border-color:var(--green);color:var(--green)}
+  .safe button.on.n{background:#FDECEC;border-color:var(--err);color:var(--err)}
+  .safe.bad button{border-color:var(--err)}
+  .ckthumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+  .ckthumbs div{position:relative;border-radius:9px;overflow:hidden;border:1px solid var(--line);aspect-ratio:4/3}
+  .ckthumbs img{width:100%;height:100%;object-fit:cover;display:block}
+  .ckthumbs button{position:absolute;top:4px;right:4px;width:22px;height:22px;border-radius:50%;border:0;background:rgba(0,0,0,.6);
+    color:#fff;font-size:13px;line-height:1;cursor:pointer;padding:0}
+  .ckres{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--line);font-size:13px}
+  .ckres:last-child{border-bottom:0}
+  .ckres span{flex:1}
+  .ckres em{font-style:normal;font-size:12px;color:var(--sub);display:block;margin-top:2px}
+  .ckres i{flex:none;width:26px;height:22px;border-radius:6px;display:grid;place-items:center;font-style:normal;font-size:10px;font-weight:800;color:#fff}
+  .ckres i svg{width:13px;height:13px}
+  .ckres i.pass{background:var(--green)} .ckres i.fail{background:var(--err)} .ckres i.na{background:#6B7280}
+  .nudge{width:100%;background:var(--amber-soft);border:1px solid #F1D7A6;border-radius:12px;padding:12px;font-size:13px;color:var(--amber);
+    font-weight:700;display:flex;gap:10px;align-items:center;line-height:1.35;text-align:left}
+  .nudge button{margin-left:auto;flex:none;border:0;background:#111;color:var(--orange);border-radius:9px;padding:9px 11px;font-size:12.5px;font-weight:800;cursor:pointer}
+
   /* ---------- toast ---------- */
   .toast{position:absolute;left:50%;bottom:96px;transform:translate(-50%,14px);z-index:90;background:rgba(20,24,32,.94);
     color:#fff;font-size:13px;font-weight:600;padding:11px 16px;border-radius:10px;max-width:82%;text-align:center;
@@ -394,8 +509,8 @@
 <header class="masthead">
   <p class="eyebrow">David Allman Haulage &mdash; Interactive Demo</p>
   <h1>Agg Loads</h1>
-  <p>Site and quarry collection dockets, start to finish: pick the collection type, fill in the load,
-     capture both signatures and the docket image, and submit it to the office.</p>
+  <p>A driver&rsquo;s day on the phone: clock in on the lorry, do the daily walkaround check,
+     then fill in site and quarry collection dockets with signatures and the docket image, and clock out.</p>
 </header>
 
 <div class="toolbar">
@@ -439,7 +554,9 @@
             <button class="grid4" data-nav="home" aria-label="Modules"><i></i><i></i><i></i><i></i></button>
           </div>
           <div class="scroll">
-            <div class="hello">
+            <div class="clockband" id="clockBand"></div>
+            <div id="dueBar"></div>
+            <div class="hello" style="margin-top:14px">
               <small data-greet>Good morning</small>
               <b data-user>David Allman</b>
               <div class="hs">
@@ -449,14 +566,12 @@
               </div>
             </div>
             <div class="modgrid">
+              <button class="mod hot" data-nav="checks"><span class="mi">%CHECKLIST%</span><span>Vehicle Check<small>Daily walkaround before you drive</small><span class="tag due" data-check-tag>Due today</span></span><span class="chev">%CHEV%</span></button>
               <button class="mod hot" data-nav="loads"><span class="mi">%TRUCK%</span><span>Agg Loads<small>Site &amp; quarry collection dockets</small></span><span class="chev">%CHEV%</span></button>
             </div>
             <div style="height:18px"></div>
           </div>
-          <nav class="bottomnav">
-            <button class="navbtn on" data-nav="home">%HOME%Dashboard</button>
-            <button class="navbtn" data-nav="loads">%TRUCK%Agg Loads</button>
-          </nav>
+          <nav class="bottomnav" data-tabs="home"></nav>
         </section>
 
         <!-- ---------- LOADS ---------- -->
@@ -500,10 +615,7 @@
             </div>
             <div style="height:18px"></div>
           </div>
-          <nav class="bottomnav">
-            <button class="navbtn" data-nav="home">%HOME%Dashboard</button>
-            <button class="navbtn on" data-nav="loads">%TRUCK%Agg Loads</button>
-          </nav>
+          <nav class="bottomnav" data-tabs="loads"></nav>
         </section>
 
         <!-- ---------- PICKER ---------- -->
@@ -515,6 +627,7 @@
           </div>
           <div class="scroll">
             <div class="picker-body">
+              <div id="pickerNudge" style="width:100%;display:none"></div>
               <div class="selectcard">
                 <div class="pls">Please Select</div>
                 <div class="selrow">
@@ -667,6 +780,60 @@
           <div class="formfoot" id="detailFoot"></div>
         </section>
 
+        <!-- ---------- HOURS (clock in / out) ---------- -->
+        <section class="view" data-view="hours">
+          <div class="apphead">
+            <button class="circ" data-nav="home" aria-label="Home">%HOME%</button>
+            <span class="brand sm"><span class="nm">DAVID ALLMAN</span><span class="st">HAULAGE</span></span>
+            <button class="grid4" data-nav="home" aria-label="Modules"><i></i><i></i><i></i><i></i></button>
+          </div>
+          <div class="scroll">
+            <div class="clockcard">
+              <div class="time" data-tick-now>--:--</div>
+              <div class="date" data-longdate>&mdash;</div>
+            </div>
+            <div id="hoursBody"></div>
+            <div style="height:6px"></div>
+          </div>
+          <nav class="bottomnav" data-tabs="hours"></nav>
+        </section>
+
+        <!-- ---------- VEHICLE CHECKS (list) ---------- -->
+        <section class="view" data-view="checks">
+          <div class="apphead">
+            <button class="circ" data-nav="home" aria-label="Home">%HOME%</button>
+            <span class="brand sm"><span class="nm">DAVID ALLMAN</span><span class="st">HAULAGE</span></span>
+            <button class="grid4" data-nav="home" aria-label="Modules"><i></i><i></i><i></i><i></i></button>
+          </div>
+          <div class="scroll">
+            <div style="height:14px"></div>
+            <div id="checksBody"></div>
+          </div>
+          <nav class="bottomnav" data-tabs="checks"></nav>
+        </section>
+
+        <!-- ---------- VEHICLE CHECK (form) ---------- -->
+        <section class="view" data-view="check">
+          <div class="topbar">
+            <button class="rbtn" data-nav="checks" aria-label="Back">%ARROW%</button>
+            <div class="ttl">Daily Vehicle Check<small data-ck-sub>&mdash;</small></div>
+            <span></span>
+          </div>
+          <div class="scroll"><div class="body" id="checkBody"></div></div>
+          <div class="formfoot"><button class="cta" id="ckSubmit">Submit check</button></div>
+        </section>
+
+        <!-- ---------- VEHICLE CHECK (read only) ---------- -->
+        <section class="view" data-view="checkview">
+          <div class="topbar">
+            <button class="rbtn" data-nav="checks" aria-label="Back">%ARROW%</button>
+            <div class="ttl">Vehicle Check<small data-cv-sub>&mdash;</small></div>
+            <span></span>
+          </div>
+          <div class="scroll" id="checkViewBody"></div>
+          <div class="formfoot"><button class="cta" data-nav="checks">Back to Checks</button></div>
+        </section>
+
       </div><!-- /views -->
 
       <!-- signature modal -->
@@ -697,16 +864,19 @@
     <h3>The flow</h3>
     <p class="sub">Follows along as you click through the phone.</p>
     <ol id="railList">
-      <li data-r="signin"><span class="n">1</span>Sign in as an employee</li>
-      <li data-r="home"><span class="n">2</span>Open Agg Loads from the dashboard</li>
-      <li data-r="loads"><span class="n">3</span>Review Active Loads &amp; filters</li>
-      <li data-r="picker"><span class="n">4</span>New Load &mdash; Site or Quarry</li>
-      <li data-r="step1"><span class="n">5</span>Customer, addresses &amp; vehicle</li>
-      <li data-r="step2"><span class="n">6</span>Category, type &amp; weight</li>
-      <li data-r="step3"><span class="n">7</span>Signatures &amp; docket image</li>
-      <li data-r="success"><span class="n">8</span>Submit &mdash; it lands in Active Loads</li>
+      <li><span class="n">1</span>Sign in as an employee</li>
+      <li><span class="n">2</span>Clock in on your lorry</li>
+      <li><span class="n">3</span>Daily vehicle check</li>
+      <li><span class="n">4</span>Review Active Loads &amp; filters</li>
+      <li><span class="n">5</span>New Load &mdash; Site or Quarry</li>
+      <li><span class="n">6</span>Customer, addresses &amp; vehicle</li>
+      <li><span class="n">7</span>Category, type &amp; weight</li>
+      <li><span class="n">8</span>Signatures &amp; docket image</li>
+      <li><span class="n">9</span>Submit &mdash; it lands in Active Loads</li>
+      <li><span class="n">10</span>Clock out at the end of the day</li>
     </ol>
-    <p class="tip">Tap the bookmark icon on any step to save a draft. Open an amber <b>Draft</b> row to carry on where you left off; a green <b>Submitted</b> row opens read only.</p>
+    <p class="tip">Clock in from the band on the dashboard. A defect marked on the vehicle check needs a note, and the office sees it straight away.</p>
+    <p class="tip" style="margin-top:8px;padding-top:0;border-top:0">Tap the bookmark icon on any step to save a draft. Open an amber <b>Draft</b> row to carry on where you left off; a green <b>Submitted</b> row opens read only.</p>
   </aside>
 </div>
 
@@ -735,6 +905,10 @@
     PEN:    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16.5 3.9l3.6 3.6L8.4 19.2l-4.6 1 1-4.6z"/><path d="M3.2 21.6h17.6"/></svg>',
     CAM:    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.6h3.2l1.4-2.2h8.8l1.4 2.2H21v10H3z"/><circle cx="12" cy="13.4" r="3.2"/></svg>',
     GALLERY:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.6" width="18" height="14.8" rx="2.2"/><circle cx="8.6" cy="9.8" r="1.6"/><path d="M4 17l5-5 4 4 3-2.4 4 3.4"/></svg>',
+    CHECKLIST:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3.6" width="14" height="17.4" rx="2"/><path d="M9 3.6h6v2.6H9zM8.6 11.2l1.6 1.6 3-3M8.6 16.4l1.6 1.6 3-3M15.4 12h.1M15.4 17.2h.1"/></svg>',
+    PLAY:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8.2 12.3l2.6 2.6 5-5.2"/></svg>',
+    STOP:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h4.4a1.6 1.6 0 011.6 1.6v12.8a1.6 1.6 0 01-1.6 1.6H14M10 16.4L5.6 12 10 7.6M5.8 12H15"/></svg>',
+    WARN:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.6l9.4 16.4H2.6z"/><path d="M12 10v4.4M12 17.4h.01"/></svg>',
     SCAN:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8.4V6a2 2 0 012-2h2.4M15.6 4H18a2 2 0 012 2v2.4M20 15.6V18a2 2 0 01-2 2h-2.4M8.4 20H6a2 2 0 01-2-2v-2.4M3.4 12h17.2"/></svg>'
   };
   var viewsEl = document.getElementById('views');
@@ -761,6 +935,34 @@
   };
   var FULL_LOAD_T = { 'Artic':28, 'Rigid':20, 'Low Loader':0 };
 
+  /* the lorries, and where a day can start from */
+  var FLEET = [
+    { reg:'231-KE-4471', name:'Scania R450 artic tipper', type:'Artic', odo:412880 },
+    { reg:'191-KE-2210', name:'DAF CF 8-wheel tipper',    type:'Rigid', odo:288140 },
+    { reg:'162-KE-9073', name:'Volvo FH artic tipper',    type:'Artic', odo:530611 }
+  ];
+  var STARTS = ['Yard — David Allman Haulage','Kildare Quarry','Blessington Sand Pit','Clondalkin Site 4','Naas Road Depot'];
+
+  /* daily walkaround — the Shannon Valley vehicle checks, widened for a tipper lorry */
+  var CHECK_ITEMS = [
+    { id:'lights',   t:'Lights, indicators & beacon' },
+    { id:'brakes',   t:'Brakes & air system',            s:'No air leaks, park brake holds' },
+    { id:'tyres',    t:'Tyres & wheel nuts',             s:'Tread, cuts, nut indicators' },
+    { id:'steer',    t:'Steering & suspension' },
+    { id:'fluids',   t:'Oil, coolant & AdBlue levels' },
+    { id:'leaks',    t:'No fuel, oil or air leaks' },
+    { id:'mirrors',  t:'Mirrors, glass & cameras' },
+    { id:'wipers',   t:'Wipers & washers' },
+    { id:'horn',     t:'Horn & reverse alarm' },
+    { id:'tacho',    t:'Tachograph working',             s:'Card in, correct mode' },
+    { id:'body',     t:'Tipper body & hydraulics',       s:'Rams, hoses, tailgate' },
+    { id:'coupling', t:'Fifth wheel & trailer coupling', s:'Artic only — N/A on a rigid' },
+    { id:'load',     t:'Sheet / net & load securing' },
+    { id:'cab',      t:'Seat belt, cab & steps' },
+    { id:'safety',   t:'Fire extinguisher & first aid kit' }
+  ];
+  function lorry(reg){ return FLEET.find(function(v){ return v.reg === reg; }) || FLEET[0]; }
+
   function esc(s){
     return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){
       return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
@@ -778,6 +980,13 @@
   function daysAgo(n){ var d = new Date(NOW); d.setDate(d.getDate()-n); return iso(d); }
   function nice(isoStr){ var a = isoStr.split('-'); return a[2]+'/'+a[1]+'/'+a[0]; }
   function hhmm(d){ return p2(d.getHours())+':'+p2(d.getMinutes()); }
+  function at(isoDate, hm){ return new Date(isoDate + 'T' + hm + ':00').getTime(); }
+  function addMin(hm, m){ var t = +hm.slice(0,2) * 60 + +hm.slice(3) + m; return p2(Math.floor(t / 60)) + ':' + p2(t % 60); }
+  function dur(ms){ var m = Math.max(0, Math.floor(ms / 60000)); return Math.floor(m / 60) + 'h ' + p2(m % 60) + 'm'; }
+  function hms(ms){ var t = Math.max(0, Math.floor(ms / 1000)); return p2(Math.floor(t / 3600)) + ':' + p2(Math.floor(t / 60) % 60) + ':' + p2(t % 60); }
+  var DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  function longDate(d){ return DAYS[d.getDay()] + ' ' + d.getDate() + ' ' + MONTHS[d.getMonth()] + ' ' + d.getFullYear(); }
   var TODAY = iso(NOW);
 
   /* fake signature + docket image so the seeded loads look real */
@@ -809,7 +1018,7 @@
   }
 
   /* ---------------- state ---------------- */
-  var STORE = 'allman-aggloads-demo-v3';
+  var STORE = 'allman-aggloads-demo-v4';
   var state;   // {role, loads:[], seq}
 
   function seed(){
@@ -823,14 +1032,38 @@
       delete o.custName;
       return o;
     }
+    /* the last week of shifts and walkarounds, so Hours and Checks have history */
+    var shifts = [], checks = [], odo = {}, n = 1;
+    FLEET.forEach(function(v){ odo[v.reg] = v.odo; });
+    for(var d = 6; d >= 1; d--){
+      var day = new Date(NOW); day.setDate(day.getDate() - d);
+      if(day.getDay() === 0) continue;                       // no Sunday work
+      var date = iso(day);
+      var reg = d === 4 ? '191-KE-2210' : USER.reg;
+      var st = d % 3 === 0 ? '06:45' : '07:05';
+      var en = day.getDay() === 6 ? '13:10' : (d % 2 ? '17:20' : '16:35');
+      shifts.push({ date:date, startTs:at(date, st), endTs:at(date, en), reg:reg, from:STARTS[0] });
+      var items = {};
+      CHECK_ITEMS.forEach(function(it){ items[it.id] = { s:'pass', note:'' }; });
+      if(lorry(reg).type === 'Rigid') items.coupling = { s:'na', note:'' };
+      var defects = 0;
+      if(d === 3){ items.wipers = { s:'fail', note:'Nearside wiper blade split — replaced at the yard' }; defects = 1; }
+      checks.push({ ref:'VC-' + (1040 + n++), date:date, time:addMin(st, 9), reg:reg, odo:lorry(reg).odo - d * 290, trailer:'',
+                    items:items, defects:defects, safe: defects ? true : null, photos:[],
+                    sig:{ name:USER.name, img:squiggle(d * 5) }, by:USER.name });
+    }
     return {
       role: null,
       seq: 48231,
+      ckSeq: 1040 + n,
+      shifts: shifts,
+      checks: checks,
+      odo: odo,
       loads: [
-        L({docket:48230, type:'quarry', status:'submitted', date:TODAY, time:'07:58', customer:'Collen Construction', order:'PO-55102',
+        L({docket:48230, type:'quarry', status:'submitted', date:daysAgo(1), time:'13:20', customer:'Collen Construction', order:'PO-55102',
            from:'Kildare Quarry', to:'Clondalkin Site 4', vehicle:'Artic', reg:USER.reg, cat:'Stone Supply', ctype:'20mm Stone',
            weight:'28.00', full:true, comments:'', custName:'Gerry Dolan'}),
-        L({docket:48229, type:'site', status:'draft', date:TODAY, time:'07:15', customer:'Lagan Construction', order:'',
+        L({docket:48229, type:'site', status:'draft', date:daysAgo(1), time:'16:50', customer:'Lagan Construction', order:'',
            from:'M7 Junction 9 Works', to:'Newbridge Compound', vehicle:'Rigid', reg:USER.reg, cat:'Muck Away', ctype:'',
            weight:'', full:false, comments:'Waiting on site foreman to confirm drop point'}),
         L({docket:48224, type:'site', status:'submitted', date:daysAgo(1), time:'15:40', customer:'John Sisk & Son', order:'SISK-8831',
@@ -856,7 +1089,6 @@
   var views = {};
   Array.prototype.forEach.call(document.querySelectorAll('.view'), function(v){ views[v.getAttribute('data-view')] = v; });
   var currentView = 'signin';
-  var RAIL = ['signin','home','loads','picker','step1','step2','step3','success'];
 
   function go(name){
     if(!views[name]) return;
@@ -867,11 +1099,33 @@
     var sc = views[name].querySelector('.scroll');
     if(sc) sc.scrollTop = 0;
     if(name === 'home' || name === 'loads') renderLoads();
+    if(name === 'home') renderHome();
+    if(name === 'hours') renderHours();
+    if(name === 'checks') renderChecks();
+    if(name === 'picker') renderPickerNudge();
     if(name === 'step3') renderSummary();
+    paintTabs();
     paintRail();
   }
+  /* which step of the flow rail a screen belongs to */
+  function railStep(){
+    var s = shiftOn();
+    switch(currentView){
+      case 'signin': return 0;
+      case 'home':   return !s ? 1 : (checkToday(s.reg) ? 3 : 2);
+      case 'hours':  return s ? 9 : 1;
+      case 'checks': case 'check': case 'checkview': return 2;
+      case 'loads':  case 'detail': return 3;
+      case 'picker': return 4;
+      case 'step1':  return 5;
+      case 'step2':  return 6;
+      case 'step3':  return 7;
+      case 'success':return 8;
+    }
+    return -1;
+  }
   function paintRail(){
-    var at = RAIL.indexOf(currentView === 'detail' ? 'loads' : currentView);
+    var at = railStep();
     Array.prototype.forEach.call(document.querySelectorAll('#railList li'), function(li, i){
       li.classList.toggle('on', i === at);
       li.classList.toggle('done', i < at);
@@ -1068,8 +1322,9 @@
   }
 
   function newDocket(type){
+    var sh = shiftOn(), lr = lorry(sh ? sh.reg : USER.reg);
     cur = { docket: state.seq++, type:type, status:'draft', date:TODAY, time:hhmm(new Date()),
-            customer:'', order:'', from:'', to:'', vehicle:'Artic', reg:USER.reg, cat:'', ctype:'',
+            customer:'', order:'', from:'', to:'', vehicle:lr.type, reg:lr.reg, cat:'', ctype:'',
             weight:'', full:false, comments:'', sigs:{}, image:null, by:USER.name, saved:false };
     persist();
     returnTo = 'picker';
@@ -1212,17 +1467,20 @@
 
   function openSig(key){
     activeSig = key;
-    document.querySelector('[data-sig-title]').textContent = (key === 'driver' ? 'Driver' : 'Customer') + ' signature';
-    sigName.value = key === 'driver' ? USER.name : ((cur.sigs.customer && cur.sigs.customer.name) || '');
-    sigName.placeholder = key === 'driver' ? 'Driver name' : 'Customer name';
+    var driver = key === 'driver' || key === 'check';
+    document.querySelector('[data-sig-title]').textContent = (driver ? 'Driver' : 'Customer') + ' signature';
+    sigName.value = driver ? USER.name : ((cur.sigs.customer && cur.sigs.customer.name) || '');
+    sigName.placeholder = driver ? 'Driver name' : 'Customer name';
     modal.classList.add('on');
     clearPad();
-    if(key !== 'driver') sigName.focus();
+    if(!driver) sigName.focus();
   }
   document.getElementById('sigClear').addEventListener('click', clearPad);
   saveBtn.addEventListener('click', function(){
-    cur.sigs[activeSig] = { name: sigName.value.trim(), img: canvas.toDataURL('image/png') };
+    var sig = { name: sigName.value.trim(), img: canvas.toDataURL('image/png') };
     modal.classList.remove('on');
+    if(activeSig === 'check'){ ck.sig = sig; renderCheckForm(); toast('Signature captured'); return; }
+    cur.sigs[activeSig] = sig;
     paintSigs();
     toast((activeSig === 'driver' ? 'Driver' : 'Customer') + ' signature captured');
   });
@@ -1278,6 +1536,353 @@
     go('detail');
   }
 
+  /* ================================================================
+     CLOCK IN / OUT
+     ================================================================ */
+  function shiftOn(){ return (state.shifts || []).find(function(x){ return !x.endTs; }) || null; }
+  function bandText(){
+    var sh = shiftOn();
+    return sh ? 'On the clock since ' + hhmm(new Date(sh.startTs)) + ' · ' + dur(Date.now() - sh.startTs)
+              : 'Not on the clock · ' + hhmm(new Date());
+  }
+
+  function clockIn(reg, from){
+    if(shiftOn()) return toast('You&rsquo;re already on the clock');
+    var now = Date.now();
+    state.shifts.push({ date:TODAY, startTs:now, endTs:null, reg:reg, from:from });
+    persist();
+    toast('Clocked in at ' + hhmm(new Date(now)) + ' &mdash; ' + reg);
+    go('home');
+  }
+  function clockOut(){
+    var sh = shiftOn();
+    if(!sh) return;
+    sh.endTs = Date.now();
+    persist();
+    toast('Clocked out &mdash; ' + dur(sh.endTs - sh.startTs) + ' on the clock');
+    go(currentView === 'hours' ? 'hours' : 'home');
+  }
+
+  function renderHome(){
+    var sh = shiftOn();
+    document.getElementById('clockBand').innerHTML =
+      '<div class="cbstate"><span class="d' + (sh ? ' on' : '') + '"></span><span data-tick-band>' + bandText() + '</span></div>' +
+      '<div class="cbacts">' +
+        (sh ? '<button class="stop" data-clockout>' + I.STOP + 'Clock Out</button>'
+            : '<button class="go" data-nav="hours">' + I.PLAY + 'Clock In</button>') +
+        '<button class="soft" data-nav="hours">' + I.CLOCK + 'Hours</button>' +
+      '</div>';
+
+    /* the walkaround nudge — never a hard block, same as the earlier demos */
+    var bar = document.getElementById('dueBar');
+    var c = sh && checkToday(sh.reg);
+    if(sh && !c){
+      bar.innerHTML = '<div class="duebar">' + I.WARN + '<span>Daily check not done on <b>' + esc(sh.reg) + '</b> &mdash; do it before your first load</span><button data-startcheck>Start check</button></div>';
+    } else if(c && c.defects){
+      bar.innerHTML = '<div class="duebar' + (c.safe ? '' : '') + '">' + I.WARN + '<span>' + c.defects + ' defect' + (c.defects === 1 ? '' : 's') +
+        ' reported on ' + esc(c.reg) + (c.safe ? ' &mdash; safe to drive' : ' &mdash; <b>vehicle off the road</b>') + '</span></div>';
+    } else bar.innerHTML = '';
+
+    var tag = document.querySelector('[data-check-tag]');
+    var reg = sh ? sh.reg : null;
+    var done = reg ? checkToday(reg) : state.checks.find(function(x){ return x.date === TODAY; });
+    tag.className = 'tag ' + (done ? (done.defects ? 'bad' : 'ok') : 'due');
+    tag.textContent = done ? 'Done ' + done.time + ' · ' + (done.defects ? done.defects + ' defect' + (done.defects === 1 ? '' : 's') : 'nil defects')
+                           : (reg ? 'Due today · ' + reg : 'Due today');
+  }
+
+  function renderHours(){
+    var sh = shiftOn();
+    document.querySelector('[data-longdate]').textContent = longDate(new Date());
+    var html = '';
+    if(sh){
+      var lr = lorry(sh.reg);
+      html += '<div class="onsite"><div class="lbl">On the clock</div><div class="el" data-tick-el>' + hms(Date.now() - sh.startTs) + '</div>' +
+              '<div class="where"><b style="font-family:var(--mono)">' + esc(sh.reg) + '</b> &middot; ' + esc(lr.name) + '<br>From ' + esc(sh.from) +
+              ' &middot; since ' + hhmm(new Date(sh.startTs)) + '</div></div>' +
+              '<button class="bigbtn out" data-clockout>' + I.STOP + 'Clock out</button>';
+    } else {
+      html += '<div class="card"><h4>Clock in</h4><p class="lead">Pick the lorry you&rsquo;re driving today and where you&rsquo;re starting from.</p>' +
+              '<div class="flabel">Lorry <span class="req">*</span></div><select class="control" id="ciReg">' +
+                FLEET.map(function(v){ return '<option value="' + v.reg + '">' + v.reg + ' — ' + esc(v.name) + '</option>'; }).join('') + '</select>' +
+              '<div class="flabel">Starting from <span class="req">*</span></div><select class="control" id="ciFrom">' +
+                STARTS.map(function(x){ return '<option>' + esc(x) + '</option>'; }).join('') + '</select>' +
+              '</div>' +
+              '<button class="bigbtn in" data-clockin>' + I.PLAY + 'Clock in</button>';
+    }
+
+    /* last seven days, newest first */
+    var since = daysAgo(6), total = 0;
+    var rows = state.shifts.filter(function(x){ return x.date >= since; })
+      .sort(function(a, b){ return b.startTs - a.startTs; })
+      .map(function(x){
+        var d = new Date(x.startTs), ms = (x.endTs || Date.now()) - x.startTs;
+        total += ms;
+        return '<div class="srow"><span class="l"><b>' + DAYS[d.getDay()] + (x.date === TODAY ? ' &middot; today' : '') + '</b>' +
+          '<small>' + hhmm(d) + '&ndash;' + (x.endTs ? hhmm(new Date(x.endTs)) : 'still on') + ' &middot; ' + esc(x.reg) + '</small></span>' +
+          '<span class="r">' + (x.endTs ? dur(ms) : '<span class="pill run">Running</span>') + '<small>' + nice(x.date).slice(0, 5) + '</small></span></div>';
+      });
+    html += '<div class="card"><h4>Last 7 days <span>' + dur(total) + '</span></h4>' +
+            (rows.length ? rows.join('') : '<p class="lead" style="margin:6px 0 0">No shifts yet.</p>') + '</div>';
+    document.getElementById('hoursBody').innerHTML = html;
+  }
+
+  /* ================================================================
+     DAILY VEHICLE CHECK
+     ================================================================ */
+  function checkToday(reg){ return state.checks.find(function(x){ return x.date === TODAY && x.reg === reg; }) || null; }
+  function ckCounts(items){
+    var c = { pass:0, fail:0, na:0, todo:0 };
+    CHECK_ITEMS.forEach(function(it){ var v = items[it.id]; c[v ? v.s : 'todo']++; });
+    return c;
+  }
+
+  function renderChecks(){
+    var sh = shiftOn(), reg = sh ? sh.reg : null, c = reg && checkToday(reg);
+    var top;
+    if(c){
+      top = '<div class="card"><h4>Today <span class="pill ' + (c.defects ? 'bad' : 'ok') + '">' + (c.defects ? c.defects + ' defect' + (c.defects === 1 ? '' : 's') : 'Nil defects') + '</span></h4>' +
+            '<p class="lead">' + esc(c.ref) + ' on <b>' + esc(c.reg) + '</b> at ' + c.time + '. ' + (c.defects ? (c.safe ? 'Reported to the office &mdash; safe to drive.' : 'Reported to the office &mdash; vehicle off the road.') : 'You&rsquo;re good to go.') + '</p>' +
+            '<button class="cta ghost" style="width:100%" data-startcheck>Check another vehicle</button></div>';
+    } else {
+      top = '<div class="card"><h4>Today <span class="pill draft">Due</span></h4>' +
+            '<p class="lead">' + (reg ? 'No walkaround yet on <b>' + esc(reg) + '</b>. Do it before your first load.' : 'Walk round the lorry before you drive. Clock in first and it picks your lorry for you.') + '</p>' +
+            '<button class="cta" style="width:100%" data-startcheck>Start daily check</button></div>';
+    }
+    var hist = state.checks.slice().sort(function(a, b){ return (b.date + b.time).localeCompare(a.date + a.time); }).map(function(x){
+      return '<button class="srow" data-openck="' + x.ref + '"><span class="l"><b>' + esc(x.ref) + ' &middot; ' + esc(x.reg) + '</b>' +
+        '<small>' + (x.date === TODAY ? 'Today' : nice(x.date)) + ' ' + x.time + ' &middot; ' + Number(x.odo).toLocaleString('en-IE') + ' km</small></span>' +
+        '<span class="pill ' + (x.defects ? 'bad' : 'ok') + '">' + (x.defects ? x.defects + ' defect' + (x.defects === 1 ? '' : 's') : 'Nil') + '</span>' +
+        '<span class="chev">' + I.CHEV + '</span></button>';
+    });
+    document.getElementById('checksBody').innerHTML = top +
+      '<div class="card"><h4>Recent checks <span>' + state.checks.length + '</span></h4>' + hist.join('') + '</div><div style="height:6px"></div>';
+  }
+
+  var ck = null;   // the check being filled in
+  function startCheck(){
+    var sh = shiftOn();
+    ck = { reg: sh ? sh.reg : FLEET[0].reg, odo:'', trailer:'', items:{}, safe:null, photos:[], sig:null, tried:false };
+    presetCoupling();
+    renderCheckForm();
+    go('check');
+  }
+  function presetCoupling(){
+    var rigid = lorry(ck.reg).type === 'Rigid';
+    if(rigid && !ck.items.coupling) ck.items.coupling = { s:'na', note:'' };
+    if(!rigid && ck.items.coupling && ck.items.coupling.s === 'na') delete ck.items.coupling;
+  }
+
+  function renderCheckForm(){
+    var body = document.getElementById('checkBody');
+    var sc = body.parentNode, keep = sc.scrollTop;
+    var lr = lorry(ck.reg), last = state.odo[ck.reg] || lr.odo;
+    var c = ckCounts(ck.items);
+    var allPass = c.pass === CHECK_ITEMS.length - (ck.items.coupling && ck.items.coupling.s === 'na' ? 1 : 0) && !c.fail && !c.todo;
+    document.querySelector('[data-ck-sub]').textContent = longDate(new Date()) + ' · ' + USER.name;
+
+    var rows = CHECK_ITEMS.map(function(it){
+      var v = ck.items[it.id], st = v ? v.s : '';
+      function b(k, label){ return '<button data-ck="' + it.id + '" data-v="' + k + '"' + (st === k ? ' class="on-' + k + '"' : '') + ' aria-label="' + k + '">' + label + '</button>'; }
+      var noteBad = ck.tried && st === 'fail' && !(v.note || '').trim();
+      return '<div class="clrow' + (st === 'fail' ? ' fail' : '') + (ck.tried && !st ? ' miss' : '') + '">' +
+        '<div class="top"><span class="lb">' + esc(it.t) + (it.s ? '<small>' + esc(it.s) + '</small>' : '') + '</span>' +
+        '<span class="tri">' + b('pass', I.CHECK) + b('fail', I.X) + b('na', 'N/A') + '</span></div>' +
+        (st === 'fail' ? '<input class="control note' + (noteBad ? ' bad' : '') + '" data-cknote="' + it.id + '" placeholder="What&rsquo;s wrong? (required)" value="' + esc(v.note || '') + '">' : '') +
+      '</div>';
+    }).join('');
+
+    body.innerHTML =
+      '<div class="flabel" style="margin-top:4px">Lorry <span class="req">*</span></div>' +
+      '<select class="control" id="ckReg">' + FLEET.map(function(v){ return '<option value="' + v.reg + '"' + (v.reg === ck.reg ? ' selected' : '') + '>' + v.reg + ' — ' + esc(v.name) + '</option>'; }).join('') + '</select>' +
+      '<p class="ckhint">' + esc(lr.type) + ' &middot; last odometer ' + Number(last).toLocaleString('en-IE') + ' km</p>' +
+      '<div class="ckmeta">' +
+        '<div><div class="flabel">Odometer (km) <span class="req">*</span></div><input class="control' + (ck.tried && !ck.odoOk ? ' bad' : '') + '" id="ckOdo" type="number" inputmode="numeric" placeholder="' + last + '" value="' + esc(ck.odo) + '"></div>' +
+        '<div><div class="flabel">Trailer no. <span class="opt">(opt.)</span></div><input class="control" id="ckTrailer" placeholder="' + (lr.type === 'Rigid' ? 'N/A' : 'e.g. T-118') + '" value="' + esc(ck.trailer) + '"' + (lr.type === 'Rigid' ? ' disabled' : '') + '></div>' +
+      '</div>' +
+
+      '<div class="sec-head">Walkaround</div>' +
+      '<div class="cksum"><div class="p"><b>' + c.pass + '</b>Pass</div><div class="f"><b>' + c.fail + '</b>Defects</div><div><b>' + c.todo + '</b>To do</div></div>' +
+      (allPass ? '<button class="nilbtn clear" data-nil="off">Clear all</button>'
+               : '<button class="nilbtn" data-nil="on">' + I.CHECK + 'Nil defects &mdash; mark all as pass</button>') +
+      '<div class="clhead"><span class="c1">Item</span><span class="c2"><span>OK</span><span>Fault</span><span>N/A</span></span></div>' +
+      '<div class="cllist">' + rows + '</div>' +
+
+      (c.fail ? '<div class="sec-head">Is the lorry safe to drive? <span style="color:var(--err)">*</span></div>' +
+        '<div class="safe' + (ck.tried && ck.safe === null ? ' bad' : '') + '">' +
+          '<button class="y' + (ck.safe === true ? ' on' : '') + '" data-safe="yes">Yes<small>Minor &mdash; fix when back</small></button>' +
+          '<button class="n' + (ck.safe === false ? ' on' : '') + '" data-safe="no">No<small>Vehicle off the road</small></button>' +
+        '</div>' : '') +
+
+      '<div class="sec-head">Photos <span class="opt" style="text-transform:none;letter-spacing:0;font-weight:600;color:var(--faint)">(' + ck.photos.length + '/6, optional)</span></div>' +
+      '<div class="capgrid" style="grid-template-columns:1fr 1fr">' +
+        '<button class="captile" data-ckphoto>' + I.CAM + 'Camera</button><button class="captile" data-ckphoto>' + I.GALLERY + 'Device</button></div>' +
+      (ck.photos.length ? '<div class="ckthumbs">' + ck.photos.map(function(src, i){ return '<div><img alt="" src="' + src + '"><button data-ckrm="' + i + '" aria-label="Remove">&times;</button></div>'; }).join('') + '</div>' : '') +
+
+      '<div class="sec-head">Driver signature <span style="color:var(--err)">*</span></div>' +
+      '<button class="sig-btn' + (ck.sig ? ' signed' : '') + (ck.tried && !ck.sig ? ' bad' : '') + '" data-sig="check">' +
+        '<span class="si">' + I.PEN + '</span><span class="st2"><b>I&rsquo;ve walked round this lorry</b><span>' +
+        (ck.sig ? 'Signed — ' + esc(ck.sig.name) + ' · tap to re-sign' : 'Tap to sign') + '</span></span>' +
+        (ck.sig ? '<img alt="" src="' + ck.sig.img + '">' : '<img alt="">') + '</button>';
+    sc.scrollTop = keep;
+  }
+
+  function photoImg(n){
+    return 'data:image/svg+xml;base64,' + btoa(
+      "<svg xmlns='http://www.w3.org/2000/svg' width='160' height='120'><rect width='160' height='120' fill='#3A3D44'/>" +
+      "<rect x='20' y='54' width='120' height='40' rx='6' fill='#55595F'/><circle cx='46' cy='96' r='12' fill='#1E2024'/>" +
+      "<circle cx='116' cy='96' r='12' fill='#1E2024'/><rect x='96' y='34' width='36' height='26' rx='4' fill='#FFC20E'/>" +
+      "<text x='10' y='20' font-family='monospace' font-size='11' fill='#fff'>PHOTO " + n + "</text></svg>");
+  }
+
+  /* check form: inputs */
+  document.getElementById('checkBody').addEventListener('input', function(e){
+    var t = e.target;
+    if(t.id === 'ckOdo'){ ck.odo = t.value; t.classList.remove('bad'); }
+    if(t.id === 'ckTrailer'){ ck.trailer = t.value.toUpperCase(); }
+    if(t.hasAttribute('data-cknote')){ ck.items[t.getAttribute('data-cknote')].note = t.value; t.classList.remove('bad'); }
+  });
+  document.getElementById('checkBody').addEventListener('change', function(e){
+    if(e.target.id === 'ckReg'){ ck.reg = e.target.value; ck.odo = ''; presetCoupling(); renderCheckForm(); }
+  });
+  /* check form: taps */
+  document.getElementById('checkBody').addEventListener('click', function(e){
+    var t = e.target.closest('[data-ck],[data-nil],[data-safe],[data-ckphoto],[data-ckrm]');
+    if(!t) return;
+    if(t.hasAttribute('data-ck')){
+      var id = t.getAttribute('data-ck'), v = t.getAttribute('data-v'), was = ck.items[id];
+      if(was && was.s === v) delete ck.items[id];            // tap again to clear, as in Shannon Valley
+      else ck.items[id] = { s:v, note: v === 'fail' && was ? was.note || '' : '' };
+      if(!ckCounts(ck.items).fail) ck.safe = null;
+      renderCheckForm();
+      if(v === 'fail' && ck.items[id]){
+        var inp = document.querySelector('[data-cknote="' + id + '"]');
+        if(inp) inp.focus({ preventScroll:true });
+      }
+    } else if(t.hasAttribute('data-nil')){
+      if(t.getAttribute('data-nil') === 'on'){
+        CHECK_ITEMS.forEach(function(it){ var v = ck.items[it.id]; if(!v || v.s !== 'na') ck.items[it.id] = { s:'pass', note:'' }; });
+        ck.safe = null;
+        toast('All items marked as pass');
+      } else { ck.items = {}; presetCoupling(); }
+      renderCheckForm();
+    } else if(t.hasAttribute('data-safe')){
+      ck.safe = t.getAttribute('data-safe') === 'yes';
+      renderCheckForm();
+    } else if(t.hasAttribute('data-ckphoto')){
+      if(ck.photos.length >= 6) return toast('Six photos is the limit');
+      ck.photos.push(photoImg(ck.photos.length + 1));
+      renderCheckForm();
+      toast('Photo added');
+    } else if(t.hasAttribute('data-ckrm')){
+      ck.photos.splice(+t.getAttribute('data-ckrm'), 1);
+      renderCheckForm();
+    }
+  });
+
+  document.getElementById('ckSubmit').addEventListener('click', function(){
+    var last = state.odo[ck.reg] || lorry(ck.reg).odo;
+    var odo = parseInt(ck.odo, 10);
+    var c = ckCounts(ck.items);
+    var missingNotes = CHECK_ITEMS.filter(function(it){ var v = ck.items[it.id]; return v && v.s === 'fail' && !(v.note || '').trim(); }).length;
+    ck.odoOk = odo > 0 && odo >= last;
+    ck.tried = true;
+    var msg = null;
+    if(!(odo > 0)) msg = 'Enter the odometer reading';
+    else if(odo < last) msg = 'Odometer can&rsquo;t be below the last reading (' + Number(last).toLocaleString('en-IE') + ' km)';
+    else if(c.todo) msg = c.todo + (c.todo === 1 ? ' item is' : ' items are') + ' still blank &mdash; every one needs an answer';
+    else if(missingNotes) msg = 'Add a note to ' + (missingNotes === 1 ? 'the defect' : 'each defect');
+    else if(c.fail && ck.safe === null) msg = 'Say whether the lorry is safe to drive';
+    else if(!ck.sig) msg = 'A signature is required';
+    renderCheckForm();
+    if(msg){
+      toast(msg);
+      var first = document.querySelector('#checkBody .bad, #checkBody .miss');
+      if(first){
+        var sc = first.closest('.scroll');
+        sc.scrollTo({ top: Math.max(0, first.getBoundingClientRect().top - sc.getBoundingClientRect().top + sc.scrollTop - sc.clientHeight / 3), behavior:'smooth' });
+      }
+      return;
+    }
+    var rec = { ref:'VC-' + (state.ckSeq++), date:TODAY, time:hhmm(new Date()), reg:ck.reg, odo:odo, trailer:ck.trailer,
+                items:ck.items, defects:c.fail, safe: c.fail ? ck.safe : null, photos:ck.photos, sig:ck.sig, by:USER.name };
+    state.checks.push(rec);
+    state.odo[ck.reg] = odo;
+    persist();
+    ck = null;
+    toast(rec.ref + ' submitted &mdash; ' + (rec.defects
+      ? rec.defects + ' defect' + (rec.defects === 1 ? '' : 's') + ' reported to the office' + (rec.safe ? '' : ', lorry off the road')
+      : 'nil defects'));
+    go('home');
+  });
+
+  function openCheck(ref){
+    var x = state.checks.find(function(r){ return r.ref === ref; });
+    if(!x) return;
+    var c = ckCounts(x.items);
+    document.querySelector('[data-cv-sub]').textContent = (x.date === TODAY ? 'Today' : nice(x.date)) + ' · ' + x.time;
+    var defects = CHECK_ITEMS.filter(function(it){ return x.items[it.id] && x.items[it.id].s === 'fail'; });
+    var mark = { pass:I.CHECK, fail:I.X, na:'N/A' };
+    document.getElementById('checkViewBody').innerHTML =
+      '<div class="dsheet">' +
+        '<div class="band"><span><small>Vehicle check</small><b>' + esc(x.ref) + '</b></span><span class="pill ' + (x.defects ? 'bad' : 'ok') + '">' +
+          (x.defects ? x.defects + ' defect' + (x.defects === 1 ? '' : 's') : 'Nil defects') + '</span></div>' +
+        '<div class="dsec"><h5>Vehicle</h5><dl>' +
+          '<dt>Lorry</dt><dd><span style="font-family:var(--mono)">' + esc(x.reg) + '</span></dd>' +
+          '<dt>Type</dt><dd>' + esc(lorry(x.reg).name) + '</dd>' +
+          '<dt>Odometer</dt><dd>' + Number(x.odo).toLocaleString('en-IE') + ' km</dd>' +
+          '<dt>Trailer</dt><dd>' + esc(x.trailer || '—') + '</dd>' +
+          '<dt>Driver</dt><dd>' + esc(x.by) + '</dd>' +
+        '</dl></div>' +
+        (defects.length ? '<div class="dsec"><h5>Defects</h5>' + defects.map(function(it){
+            return '<div class="ckres"><i class="fail">' + I.X + '</i><span><b>' + esc(it.t) + '</b><em>' + esc(x.items[it.id].note) + '</em></span></div>';
+          }).join('') +
+          '<p style="margin:8px 0 0;font-size:13px;font-weight:800;color:' + (x.safe ? 'var(--green)' : 'var(--err)') + '">' +
+          (x.safe ? 'Safe to drive &mdash; minor defect' : 'Not safe &mdash; vehicle off the road') + '</p></div>' : '') +
+        '<div class="dsec"><h5>Walkaround &middot; ' + c.pass + ' pass &middot; ' + c.fail + ' fault &middot; ' + c.na + ' n/a</h5>' +
+          CHECK_ITEMS.map(function(it){ var v = x.items[it.id] || { s:'na' };
+            return '<div class="ckres"><i class="' + v.s + '">' + mark[v.s] + '</i><span>' + esc(it.t) + '</span></div>'; }).join('') +
+        '</div>' +
+        (x.photos && x.photos.length ? '<div class="dsec"><h5>Photos</h5><div class="ckthumbs" style="margin:0">' +
+          x.photos.map(function(src){ return '<div><img alt="" src="' + src + '"></div>'; }).join('') + '</div></div>' : '') +
+        '<div class="dsec"><h5>Signed</h5><div class="sigbox" style="max-width:180px"><img alt="" src="' + x.sig.img + '"><span>' + esc(x.sig.name) + '</span><em>Driver</em></div></div>' +
+      '</div>' +
+      '<p class="ro">' + I.LOCK + ' Sent to the office &mdash; read only</p><div style="height:16px"></div>';
+    go('checkview');
+  }
+
+  /* nudge on the New Load picker — it reminds, it doesn't block */
+  function renderPickerNudge(){
+    var el = document.getElementById('pickerNudge'), sh = shiftOn();
+    if(!sh){
+      el.innerHTML = '<div class="nudge">' + I.CLOCK + '<span>You&rsquo;re not clocked in</span><button data-nav="hours">Clock in</button></div>';
+    } else if(!checkToday(sh.reg)){
+      el.innerHTML = '<div class="nudge">' + I.WARN + '<span>Daily check not done on ' + esc(sh.reg) + '</span><button data-startcheck>Do it now</button></div>';
+    } else { el.innerHTML = ''; }
+    el.style.display = el.innerHTML ? 'block' : 'none';
+  }
+
+  /* bottom tabs, shared by every main screen */
+  var TABS = [['home','HOME','Dashboard'],['loads','TRUCK','Agg Loads'],['checks','CHECKLIST','Checks'],['hours','CLOCK','Hours']];
+  Array.prototype.forEach.call(document.querySelectorAll('[data-tabs]'), function(nav){
+    nav.innerHTML = TABS.map(function(t){ return '<button class="navbtn" data-nav="' + t[0] + '">' + I[t[1]] + t[2] + '</button>'; }).join('');
+  });
+  function paintTabs(){
+    Array.prototype.forEach.call(document.querySelectorAll('[data-tabs="' + currentView + '"] .navbtn'), function(b){
+      b.classList.toggle('on', b.getAttribute('data-nav') === currentView);
+    });
+  }
+
+  /* clock + check taps that live outside the check form */
+  document.addEventListener('click', function(e){
+    var t = e.target.closest('[data-clockin],[data-clockout],[data-startcheck],[data-openck]');
+    if(!t) return;
+    if(t.hasAttribute('data-clockin')) clockIn(document.getElementById('ciReg').value, document.getElementById('ciFrom').value);
+    if(t.hasAttribute('data-clockout')) clockOut();
+    if(t.hasAttribute('data-startcheck')) startCheck();
+    if(t.hasAttribute('data-openck')) openCheck(t.getAttribute('data-openck'));
+  });
+
   /* ---------------- global click routing ---------------- */
   document.addEventListener('click', function(e){
     var t = e.target.closest('[data-go],[data-nav],[data-signin],[data-toast],[data-sig],[data-capture],[data-open],[data-new],[data-next],[data-draft],[data-back]');
@@ -1321,15 +1926,21 @@
   });
   document.getElementById('resetBtn').addEventListener('click', function(){
     try{ localStorage.removeItem(STORE); }catch(e){}
-    state = seed(); cur = null;
+    state = seed(); cur = null; ck = null;
     Object.keys(qEls).forEach(function(k){ qEls[k].value = ''; q[k] = ''; });
     modal.classList.remove('on');
     go('signin');
     toast('Demo reset');
   });
 
-  function tick(){ document.getElementById('clock').textContent = hhmm(new Date()); }
-  tick(); setInterval(tick, 30000);
+  function tick(){
+    var now = new Date(), sh = shiftOn();
+    document.getElementById('clock').textContent = hhmm(now);
+    setAll('data-tick-now', hhmm(now));
+    setAll('data-tick-band', bandText());
+    if(sh) setAll('data-tick-el', hms(Date.now() - sh.startTs));
+  }
+  tick(); setInterval(tick, 1000);
 
   renderLoads();
   if(state.role) signIn(state.role); else paintRail();
